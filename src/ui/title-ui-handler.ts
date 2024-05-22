@@ -1,5 +1,6 @@
 import BattleScene from "../battle-scene";
 import { DailyRunScoreboard } from "./daily-run-scoreboard";
+import { EventBoard } from "./event-board";
 import OptionSelectUiHandler from "./option-select-ui-handler";
 import { Mode } from "./ui";
 import * as Utils from "../utils";
@@ -10,6 +11,7 @@ import i18next from "i18next";
 export default class TitleUiHandler extends OptionSelectUiHandler {
   private titleContainer: Phaser.GameObjects.Container;
   private dailyRunScoreboard: DailyRunScoreboard;
+  private eventBoard: EventBoard;
   private playerCountLabel: Phaser.GameObjects.Text;
   private splashMessage: string;
   private splashMessageText: Phaser.GameObjects.Text;
@@ -33,10 +35,14 @@ export default class TitleUiHandler extends OptionSelectUiHandler {
     logo.setOrigin(0.5, 0);
     this.titleContainer.add(logo);
 
-    this.dailyRunScoreboard = new DailyRunScoreboard(this.scene, 1, 44);
-		this.dailyRunScoreboard.setup();
+//    this.dailyRunScoreboard = new DailyRunScoreboard(this.scene, 1, 44);
+//		this.dailyRunScoreboard.setup();
 
-    this.titleContainer.add(this.dailyRunScoreboard);
+//    this.titleContainer.add(this.dailyRunScoreboard);
+	
+    this.eventBoard = new EventBoard(this.scene, 1, 44);
+
+    this.titleContainer.add(this.eventBoard);
 
     this.playerCountLabel = addTextObject(this.scene, (this.scene.game.canvas.width / 6) - 2, (this.scene.game.canvas.height / 6) - 90, `? ${i18next.t("menu:playersOnline")}`, TextStyle.MESSAGE, { fontSize: '54px' });
     this.playerCountLabel.setOrigin(1, 0);
@@ -80,7 +86,7 @@ export default class TitleUiHandler extends OptionSelectUiHandler {
 
       const ui = this.getUi();
 
-      this.dailyRunScoreboard.update();
+//      this.dailyRunScoreboard.update();
 
       this.updateTitleStats();
 

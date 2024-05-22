@@ -264,8 +264,29 @@ export class TitlePhase extends Phase {
       noCancel: true,
       yOffset: 47
     };
+	
+    // Store the selected index and handle keyboard navigation
+    let selectedIndex = 0;
+
+	console.log("yo");
+	
+	config.onSelect = (index: number) => {
+		if (index !== selectedIndex) {
+			console.log("Hovered option:", optionLabels[index]);
+			// Perform actions for hover (if needed)
+		} else {
+			console.log("Selected option:", optionLabels[selectedIndex]);
+			if (optionLabels[selectedIndex] === i18next.t('menu:dailyRun')) {
+				console.log("User selected Daily Run option.");
+				// Perform actions specific to Daily Run option
+			}
+		}
+		selectedIndex = index;
+	};
+	
     this.scene.ui.setMode(Mode.TITLE, config);
   }
+
 
   loadSaveSlot(slotId: integer): void {
     this.scene.sessionSlotId = slotId > -1 ? slotId : loggedInUser.lastSessionSlot;
