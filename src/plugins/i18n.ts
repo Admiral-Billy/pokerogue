@@ -49,6 +49,7 @@ export interface ModifierTypeTranslationEntries {
 export interface PokemonInfoTranslationEntries {
   Stat: SimpleTranslationEntries,
   Type: SimpleTranslationEntries,
+  Move: SimpleTranslationEntries
 }
 
 export interface BerryTranslationEntry {
@@ -146,7 +147,6 @@ declare module "i18next" {
       pokemon: SimpleTranslationEntries;
       pokemonInfo: PokemonInfoTranslationEntries;
       commandUiHandler: SimpleTranslationEntries;
-      fightUiHandler: SimpleTranslationEntries;
       titles: SimpleTranslationEntries;
       trainerClasses: SimpleTranslationEntries;
       trainerNames: SimpleTranslationEntries;

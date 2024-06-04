@@ -21,6 +21,7 @@ import { PlayerGender } from "../system/game-data";
 import { Variant, getVariantTint } from "#app/data/variant";
 import {Button} from "../enums/buttons";
 import { Ability } from "../data/ability.js";
+import i18next from "i18next";
 
 enum Page {
   PROFILE,
@@ -224,7 +225,7 @@ export default class SummaryUiHandler extends UiHandler {
     moveEffectBg.setOrigin(0, 0);
     this.moveEffectContainer.add(moveEffectBg);
 
-    const moveEffectLabels = addTextObject(this.scene, 8, 12, "Power\nAccuracy\nCategory", TextStyle.SUMMARY);
+    const moveEffectLabels = addTextObject(this.scene, 8, 12, `${i18next.t("pokemonInfo:Move.EFFECT_POWER")}\n${i18next.t("pokemonInfo:Move.EFFECT_ACCURACY")}\n${i18next.t("pokemonInfo:Move.EFFECT_CATEGORY")}`, TextStyle.SUMMARY);
     moveEffectLabels.setLineSpacing(9);
     moveEffectLabels.setOrigin(0, 0);
 
@@ -715,7 +716,7 @@ export default class SummaryUiHandler extends UiHandler {
       }
 
       if (this.pokemon.getLuck()) {
-        const luckLabelText = addTextObject(this.scene, 141, 28, "Luck:", TextStyle.SUMMARY_ALT);
+        const luckLabelText = addTextObject(this.scene, 141, 28, `${i18next.t("pokemonInfo:Stat.LUCK")}:`, TextStyle.SUMMARY_ALT);
         luckLabelText.setOrigin(0, 0);
         profileContainer.add(luckLabelText);
 
