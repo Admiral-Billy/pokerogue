@@ -64,6 +64,7 @@ jobs:
       if: steps.check_match.outputs.stop_build != 'true'
       run: |
         cd dist
+        echo ${{ steps.latest_commit.outputs.latest_commit }} > currentVersion.txt
         zip -r game.zip .
 
     - name: Create Release
