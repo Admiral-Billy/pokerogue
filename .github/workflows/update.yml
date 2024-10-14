@@ -91,53 +91,6 @@ jobs:
         asset_name: game.zip
         asset_content_type: application/zip
 
-    - name: Checkout beta repository
-      uses: actions/checkout@v2
-      with:
-        repository: pagefaultgames/pokerogue
-        ref: beta
-
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '20.x'
-
-    - name: Install dependencies
-      run: npm install
-
-    - name: Build game
-      run: npm run build -- --mode development
-
-    - name: Package game
-      run: |
-        cd dist
-        zip -r game_beta.zip .
-
-    - name: Gets latest created release info
-      id: latest_release_info
-      uses: jossef/action-latest-release-info@v1.2.1
-      env:
-        GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
-
-    - name: Delete old release assets
-      uses: mknejp/delete-release-assets@v1
-      with:
-        token: ${{ secrets.RELEASE_TOKEN }}
-        tag: "release-${{ steps.get_release.outputs.current_release }}"
-        assets: game_beta.zip
-        fail-if-no-assets: false
-        
-    - name: Upload Beta Release Asset
-      id: upload-release-asset-beta
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
-      with:
-        upload_url: ${{ steps.latest_release_info.outputs.upload_url }}
-        asset_path: ./dist/game_beta.zip
-        asset_name: game_beta.zip
-        asset_content_type: application/zip
-
     - name: Checkout Futabas repository
       uses: actions/checkout@v4
       with:
@@ -196,6 +149,53 @@ jobs:
         upload_url: ${{ steps.latest_release_info.outputs.upload_url }}
         asset_path: ./game/kanto_version.zip
         asset_name: kanto_version.zip
+        asset_content_type: application/zip
+
+    - name: Checkout beta repository
+      uses: actions/checkout@v2
+      with:
+        repository: pagefaultgames/pokerogue
+        ref: beta
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '20.x'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build game
+      run: npm run build -- --mode development
+
+    - name: Package game
+      run: |
+        cd dist
+        zip -r game_beta.zip .
+
+    - name: Gets latest created release info
+      id: latest_release_info
+      uses: jossef/action-latest-release-info@v1.2.1
+      env:
+        GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+
+    - name: Delete old release assets
+      uses: mknejp/delete-release-assets@v1
+      with:
+        token: ${{ secrets.RELEASE_TOKEN }}
+        tag: "release-${{ steps.get_release.outputs.current_release }}"
+        assets: game_beta.zip
+        fail-if-no-assets: false
+        
+    - name: Upload Beta Release Asset
+      id: upload-release-asset-beta
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+      with:
+        upload_url: ${{ steps.latest_release_info.outputs.upload_url }}
+        asset_path: ./dist/game_beta.zip
+        asset_name: game_beta.zip
         asset_content_type: application/zip
 
     - name: Delete old releases
