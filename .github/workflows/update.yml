@@ -91,6 +91,12 @@ jobs:
         asset_name: game.zip
         asset_content_type: application/zip
 
+    - name: Gets latest created release info
+      id: latest_release_info
+      uses: jossef/action-latest-release-info@v1.2.1
+      env:
+        GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+
     - name: Checkout Futabas repository
       uses: actions/checkout@v4
       with:
@@ -172,12 +178,6 @@ jobs:
       run: |
         cd dist
         zip -r game_beta.zip .
-
-    - name: Gets latest created release info
-      id: latest_release_info
-      uses: jossef/action-latest-release-info@v1.2.1
-      env:
-        GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
 
     - name: Delete old release assets
       uses: mknejp/delete-release-assets@v1
