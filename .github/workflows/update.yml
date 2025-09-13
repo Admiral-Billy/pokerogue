@@ -54,6 +54,8 @@ jobs:
 
     - name: Setup pnpm
       uses: pnpm/action-setup@v4
+      with:
+        version: 10
 
     - name: Install dependencies
       if: steps.check_match.outputs.stop_build != 'true'
