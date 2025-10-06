@@ -63,7 +63,7 @@ jobs:
 
     - name: Build game
       if: steps.check_match.outputs.stop_build != 'true'
-      run: pnpm run build -- --mode development
+      run: pnpm build:dev
 
     - name: Package game
       if: steps.check_match.outputs.stop_build != 'true'
