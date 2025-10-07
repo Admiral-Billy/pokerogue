@@ -63,7 +63,7 @@ jobs:
 
     - name: Build game
       if: steps.check_match.outputs.stop_build != 'true'
-      run: pnpm build:dev
+      run: pnpm build:app
 
     - name: Package game
       if: steps.check_match.outputs.stop_build != 'true'
@@ -177,7 +177,7 @@ jobs:
       run: pnpm install
 
     - name: Build game
-      run: pnpm run build --mode development
+      run: pnpm build:dev
 
     - name: Package game
       run: |
