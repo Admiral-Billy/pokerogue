@@ -167,11 +167,17 @@ jobs:
       with:
         repository: pagefaultgames/pokerogue
         ref: beta
-
+        
     - name: Set up Node.js
-      uses: actions/setup-node@v2
+      if: steps.check_match.outputs.stop_build != 'true'
+      uses: actions/setup-node@v5
       with:
-        node-version: '20.x'
+        node-version: '>=24.9.0'
+
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: 10
 
     - name: Install dependencies
       run: pnpm install
