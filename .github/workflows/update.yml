@@ -15,10 +15,11 @@ jobs:
 
     steps:
     - name: Checkout original repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v5
       with:
         repository: pagefaultgames/pokerogue
         ref: main
+        submodules: 'recursive'
 
     - name: Get latest commit hash
       id: latest_commit
@@ -103,7 +104,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
 
     - name: Checkout Futabas repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
       with:
         repository: skrftb/pokerogue-debug
         ref: main
@@ -133,7 +134,7 @@ jobs:
         asset_content_type: application/zip
 
     - name: Checkout Kanto repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
       with:
         repository: skrftb/pokerogue-kanto
         ref: main
@@ -163,10 +164,11 @@ jobs:
         asset_content_type: application/zip
 
     - name: Checkout beta repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v5
       with:
         repository: pagefaultgames/pokerogue
         ref: beta
+        submodules: 'recursive'
         
     - name: Set up Node.js
       uses: actions/setup-node@v5
