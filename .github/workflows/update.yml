@@ -14,21 +14,6 @@ jobs:
       RELEASE_TOKEN: ${{ secrets.RELEASE_TOKEN }}
 
     steps:
-    - name: Setup pnpm
-      uses: pnpm/action-setup@v4
-      with:
-        version: 10
-        
-    - name: Install Dependencies
-      run: pnpm i --frozen-lockfile
-
-    - name: Set up Node.js
-      if: steps.check_match.outputs.stop_build != 'true'
-      uses: actions/setup-node@v5
-      with:
-        node-version: '>=24.9.0'
-        cache: pnpm
-    
     - name: Checkout original repository
       uses: actions/checkout@v5
       with:
@@ -61,6 +46,21 @@ jobs:
         else
           echo "::set-output name=stop_build::false"
         fi
+
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: 10
+        
+    - name: Install Dependencies
+      run: pnpm i --frozen-lockfile
+
+    - name: Set up Node.js
+      if: steps.check_match.outputs.stop_build != 'true'
+      uses: actions/setup-node@v5
+      with:
+        node-version: '>=24.9.0'
+        cache: pnpm
 
     - name: Install dependencies
       if: steps.check_match.outputs.stop_build != 'true'
