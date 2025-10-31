@@ -18,6 +18,9 @@ jobs:
       uses: pnpm/action-setup@v4
       with:
         version: 10
+        
+    - name: Install Dependencies
+      run: pnpm i --frozen-lockfile
 
     - name: Set up Node.js
       if: steps.check_match.outputs.stop_build != 'true'
