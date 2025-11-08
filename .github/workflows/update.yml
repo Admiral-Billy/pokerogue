@@ -154,6 +154,7 @@ jobs:
         tag: "release-${{ steps.get_release.outputs.current_release }}"
         assets: kanto_version.zip
         fail-if-no-assets: false
+        fail-if-no-release: false
         
     - name: Upload Kanto Release Asset
       id: upload-release-asset-3
