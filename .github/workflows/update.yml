@@ -123,6 +123,7 @@ jobs:
         tag: "release-${{ steps.get_release.outputs.current_release }}"
         assets: game_futaba_mod.zip
         fail-if-no-assets: false
+        fail-if-no-release: false
         
     - name: Upload Futabas Release Asset
       id: upload-release-asset-2
@@ -190,6 +191,7 @@ jobs:
         tag: "release-${{ steps.get_release.outputs.current_release }}"
         assets: game_beta.zip
         fail-if-no-assets: false
+        fail-if-no-release: false
         
     - name: Upload Beta Release Asset
       id: upload-release-asset-beta
