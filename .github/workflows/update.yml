@@ -30,7 +30,7 @@ jobs:
     - name: Get current release
       id: get_release
       run: |
-        response=$(curl -s -H "Authorization: token $RELEASE_TOKEN" "https://api.github.com/repos/Admiral-Billy/pokerogue/releases?per_page=1&draft=true")
+        response=$(curl -s -H "Authorization: token $RELEASE_TOKEN" "https://api.github.com/repos/Admiral-Billy/pokerogue/releases?per_page=1")
         current_release=$(echo "$response" | jq -r '.[0].name')
         echo "::set-output name=current_release::$current_release"
 
