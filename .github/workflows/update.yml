@@ -25,14 +25,15 @@ jobs:
       id: latest_commit
       run: |
         latest_commit=$(git log --pretty=format:'%h' -n 1)
-        echo "::set-output name=latest_commit::$latest_commit"
+        echo "latest_commit=$latest_commit" >> $GITHUB_OUTPUT
 
     - name: Get current release
       id: get_release
       run: |
-        response=$(curl -s -H "Authorization: token $RELEASE_TOKEN" "https://api.github.com/repos/Admiral-Billy/pokerogue/releases?per_page=1")
+        response=$(curl -s -H "Authorization: token $RELEASE_TOKEN" \
+        "https://api.github.com/repos/Admiral-Billy/pokerogue/releases?per_page=1&draft=true")
         current_release=$(echo "$response" | jq -r '.[0].name')
-        echo "::set-output name=current_release::$current_release"
+        echo "current_release=$current_release" >> $GITHUB_OUTPUT
 
     - name: Check if latest commit matches current draft release
       id: check_match
@@ -42,9 +43,9 @@ jobs:
         echo "Latest commit: $latest_commit"
         echo "Current release: $current_release"
         if [ "$latest_commit" == "$current_release" ]; then
-          echo "::set-output name=stop_build::true"
+          echo "stop_build=true" >> $GITHUB_OUTPUT
         else
-          echo "::set-output name=stop_build::false"
+          echo "stop_build=false" >> $GITHUB_OUTPUT
         fi
 
     - name: Setup pnpm
