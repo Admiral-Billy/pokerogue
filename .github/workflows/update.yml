@@ -2,7 +2,7 @@ name: Build and Package Game
 
 on:
   schedule:
-    - cron: '*/60 * * * *'
+    - cron: '*/180 * * * *'
   push:
     branches: [main]
 
