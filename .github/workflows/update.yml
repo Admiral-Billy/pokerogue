@@ -2,7 +2,7 @@ name: Build and Package Game
 
 on:
   schedule:
-    - cron: '*/180 * * * *'
+    - cron: '0 */3 * * *'
   push:
     branches: [main]
 
@@ -135,37 +135,6 @@ jobs:
         upload_url: ${{ steps.latest_release_info.outputs.upload_url }}
         asset_path: ./game/game_futaba_mod.zip
         asset_name: game_futaba_mod.zip
-        asset_content_type: application/zip
-
-    - name: Checkout Kanto repository
-      uses: actions/checkout@v5
-      with:
-        repository: skrftb/pokerogue-kanto
-        ref: main
-     
-    - name: Package game
-      run: |
-        cd game
-        zip -r kanto_version.zip .
-        
-    - name: Delete old release assets
-      uses: mknejp/delete-release-assets@v1
-      with:
-        token: ${{ secrets.RELEASE_TOKEN }}
-        tag: "release-${{ steps.get_release.outputs.current_release }}"
-        assets: kanto_version.zip
-        fail-if-no-assets: false
-        fail-if-no-release: false
-        
-    - name: Upload Kanto Release Asset
-      id: upload-release-asset-3
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
-      with:
-        upload_url: ${{ steps.latest_release_info.outputs.upload_url }}
-        asset_path: ./game/kanto_version.zip
-        asset_name: kanto_version.zip
         asset_content_type: application/zip
 
     - name: Checkout beta repository
